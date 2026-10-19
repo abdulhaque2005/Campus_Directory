@@ -1,7 +1,6 @@
-
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import students from '@/data/datas';
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import students from "@/data/students";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -10,7 +9,7 @@ type Props = {
 export default async function StudentsProfile({ params }: Props) {
   const { id } = await params;
 
-  const student = students.find((i) => i.id === id);
+  const student = students.find((i) => i.id.toLowerCase() === id.toLowerCase());
 
   if (!student) {
     notFound();
@@ -21,11 +20,11 @@ export default async function StudentsProfile({ params }: Props) {
     .split(/\s+/)
     .map((word) => word[0])
     .slice(0, 2)
-    .join('')
+    .join("")
     .toUpperCase();
 
   return (
-    <main className="min-h-screen bg-gray-50 p-6 md:p-12">
+    <main className="min-h-screen bg-[#faf9ff] p-6 md:p-12 text-gray-900">
       <Link
         href="/students"
         className="text-sm text-blue-600 hover:underline"
@@ -47,37 +46,37 @@ export default async function StudentsProfile({ params }: Props) {
           </div>
         </div>
 
-        <hr className="my-6" />
+        <hr className="my-6 border-gray-200" />
 
-        <h2 className="mb-4 text-lg font-semibold">
+        <h2 className="mb-4 text-lg font-semibold text-gray-900">
           Student Information
         </h2>
 
         <div className="space-y-4">
           <div>
             <p className="text-sm text-gray-500">Full Name</p>
-            <p className="font-medium">{student.name}</p>
+            <p className="font-medium text-gray-900">{student.name}</p>
           </div>
 
           <div>
             <p className="text-sm text-gray-500">Student ID</p>
-            <p className="font-medium">{student.id}</p>
+            <p className="font-medium text-gray-900">{student.id}</p>
           </div>
 
           <div>
             <p className="text-sm text-gray-500">Department</p>
-            <p className="font-medium">{student.department}</p>
+            <p className="font-medium text-gray-900">{student.department}</p>
           </div>
 
           <div>
             <p className="text-sm text-gray-500">Academic Year</p>
-            <p className="font-medium">{student.year} Year</p>
+            <p className="font-medium text-gray-900">{student.year} Year</p>
           </div>
 
-          {'email' in student && (
+          {student.email && (
             <div>
               <p className="text-sm text-gray-500">Email</p>
-              <p className="font-medium">{student.email}</p>
+              <p className="font-medium text-gray-900">{student.email}</p>
             </div>
           )}
         </div>

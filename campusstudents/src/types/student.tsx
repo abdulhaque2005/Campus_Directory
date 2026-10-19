@@ -1,11 +1,3 @@
-
-
-export type Student = {
-    id: string;
-    name: string;
-    email: string;
-    department: string;
-    year: number;
-};
-
+export * from "./student";
+import Student from "./student";
 export default Student;
